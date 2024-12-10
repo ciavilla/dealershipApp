@@ -4,6 +4,8 @@ import MainPage from "./MainPage";
 
 import ModelList from "./ModelList";
 import Nav from "./Nav";
+import ListManufacturers from "./ListManufacturers";
+import CreateManufacturer from "./CreateManufacturer";
 
 function App() {
 	return (
@@ -12,8 +14,8 @@ function App() {
 			<div className="container">
 				<Routes>
 					<Route path="/" element={<MainPage />} />
-
-
+					<Route path="/manufacturers" element={<ListManufacturers />} />
+					<Route path="/manufacturers/new/" element={<CreateManufacturer />} />
 					<Route path="/models" element={<ModelList />} />
 					<Route path="/models/new" element={<ModelForm />} />
 					{/* <Route path="/automobiles" element={<AutomobilesList />} /> */}
