@@ -10,6 +10,9 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+              <NavLink to="/models" className="nav-link">Models</NavLink>
+            </li>
           </ul>
         </div>
       </div>
