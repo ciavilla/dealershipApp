@@ -15,8 +15,8 @@ function App() {
 
 
 					<Route path="/models" element={<ModelList />} />
-					{/* <Route path="/models/new" element={<ModelForm />} />
-					<Route path="/automobiles" element={<AutomobilesList />} /> */}
+					<Route path="/models/new" element={<ModelForm />} />
+					{/* <Route path="/automobiles" element={<AutomobilesList />} /> */}
 
 				</Routes>
 			</div>
