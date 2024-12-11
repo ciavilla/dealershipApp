@@ -15,8 +15,6 @@ function ListManufacturers() {
                 setManufacturers(data.manufacturers);
             } catch (error) {
                 console.error("Error fetching shoes:", error);
-            }finally {
-                setLoading(false);
             }
         };
         fetchManufacturers();
