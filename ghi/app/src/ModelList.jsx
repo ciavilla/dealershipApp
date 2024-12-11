@@ -9,7 +9,6 @@ function ModelList() {
         try {
             const request = await fetch(url)
             const { models } = await request.json()
-            console.log(models)
             setModels(models)
         } catch(error) {
             console.error(error)
