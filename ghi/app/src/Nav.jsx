@@ -14,13 +14,19 @@ function Nav() {
               <NavLink to="/models" className="nav-link">Models</NavLink>
             </li>
             <li>
+              <NavLink to="/models/create" className="nav-link">Create a Model</NavLink>
+            </li>
+            <li>
               <NavLink to="/manufacturers" className="nav-link">Manufacturers</NavLink>
             </li>
             <li>
-              <NavLink to="/manufacturers/new/" className="nav-link">Add Manufacturer</NavLink>
+              <NavLink to="/manufacturers/create/" className="nav-link">Create a Manufacturer</NavLink>
             </li>
             <li>
-              <NavLink to="/automobiles/new/" className="nav-link">Add Vehicle</NavLink>
+              <NavLink to="/automobiles" className="nav-link">Automobiles</NavLink>
+            </li>
+            <li>
+              <NavLink to="/automobiles/create/" className="nav-link">Create a Automobile</NavLink>
             </li>
           </ul>
         </div>

@@ -3,6 +3,7 @@ import MainPage from "./MainPage";
 
 
 import ModelList from "./ModelList";
+import ModelForm from "./ModelForm";
 import Nav from "./Nav";
 import ListManufacturers from "./ListManufacturers";
 import CreateManufacturer from "./CreateManufacturer";
@@ -17,11 +18,11 @@ function App() {
 				<Routes>
 					<Route path="/" element={<MainPage />} />
 					<Route path="/manufacturers" element={<ListManufacturers />} />
-					<Route path="/manufacturers/new/" element={<CreateManufacturer />} />
+					<Route path="/manufacturers/create/" element={<CreateManufacturer />} />
 					<Route path="/models" element={<ModelList />} />
-					{/* <Route path="/models/new" element={<ModelForm />} />
-					<Route path="/automobiles" element={<AutomobilesList />} /> */}
-					<Route path="/automobiles/new/" element={<CreateInventory />} />
+					<Route path="/models/create" element={<ModelForm />} />
+					{/* <Route path="/automobiles" element={<AutomobilesList />} /> */}
+					<Route path="/automobiles/create/" element={<CreateInventory />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
