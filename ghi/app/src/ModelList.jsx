@@ -29,12 +29,12 @@ function ModelList() {
                     <th scope="col">Picture</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
+                <tbody className="table-group-divider">
                     {models.map((model)=>
                         <tr key={model.id}>
                         <td>{model.name}</td>
                         <td>{model.manufacturer.name}</td>
-                        <td><img src={model.picture_url}/></td>
+                        <td><img className="img-fluid" style={{width: '400px'}} src={model.picture_url}/></td>
                         </tr>
                     )}
                 </tbody>
