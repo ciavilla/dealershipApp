@@ -35,7 +35,7 @@ class AppointmentEncoder(ModelEncoder):
         "technician"
     ]
     encoders = {
-        "technicians": TechnicianEncoder(),
+        "technician": TechnicianEncoder(),
     }
 
 
@@ -44,7 +44,7 @@ class AppointmentEncoder(ModelEncoder):
 def technician_list(request):
     if request.method == "GET":
         technicians = Technician.objects.all()
-        return JsonResponse({"technicians": technicians}, encoder=TechnicianEncoder)
+        return JsonResponse({"technician": technicians}, encoder=TechnicianEncoder)
     elif request.method == "POST":
         try:
             content = json.loads(request.body)
