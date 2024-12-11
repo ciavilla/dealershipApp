@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
-
-
 import ModelList from "./ModelList";
 import ModelForm from "./ModelForm";
 import Nav from "./Nav";
 import ListManufacturers from "./ListManufacturers";
 import CreateManufacturer from "./CreateManufacturer";
+import AutomobilesList from "./AutomobilesList";
 import CreateInventory from "./CreateInventory";
 
 
@@ -21,7 +20,7 @@ function App() {
 					<Route path="/manufacturers/create/" element={<CreateManufacturer />} />
 					<Route path="/models" element={<ModelList />} />
 					<Route path="/models/create" element={<ModelForm />} />
-					{/* <Route path="/automobiles" element={<AutomobilesList />} /> */}
+					<Route path="/automobiles" element={<AutomobilesList />} />
 					<Route path="/automobiles/create/" element={<CreateInventory />} />
 				</Routes>
 			</div>
