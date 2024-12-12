@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date, time
 
 # Create your models here.
 class Technician(models.Model):
@@ -25,7 +26,8 @@ class Appointment(models.Model):
         ('finished', 'Finished'),
     ]
 
-    date_time = models.DateTimeField()
+    date = models.DateField(default=date.today)
+    time = models.TimeField(default=time(9, 0))
     reason = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='scheduled')
     vin = models.CharField(max_length=17)

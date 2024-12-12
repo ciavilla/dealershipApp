@@ -27,7 +27,8 @@ class AutomobileEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
-        "date_time",
+        "date",
+        "time",
         "reason",
         "status",
         "vin",
