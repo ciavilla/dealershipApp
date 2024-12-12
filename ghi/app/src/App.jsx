@@ -7,7 +7,8 @@ import ListManufacturers from "./ListManufacturers";
 import CreateManufacturer from "./CreateManufacturer";
 import AutomobilesList from "./AutomobilesList";
 import CreateInventory from "./CreateInventory";
-
+import TechnicianList from "./ListTechnicians";
+import AddTechnician from "./AddTechnician";
 
 function App() {
 	return (
@@ -22,6 +23,8 @@ function App() {
 					<Route path="/models/create" element={<ModelForm />} />
 					<Route path="/automobiles" element={<AutomobilesList />} />
 					<Route path="/automobiles/create/" element={<CreateInventory />} />
+					<Route path="/technicians" element={<TechnicianList />} />
+					<Route path="/technicians/create/" element={<AddTechnician />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
