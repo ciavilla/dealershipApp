@@ -17,7 +17,7 @@ function SalespersonList() {
 
     return (
         <div>
-            <h1>Models</h1>
+            <h1>Salespeople</h1>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>

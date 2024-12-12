@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SalespersonForm() {
+function CustomersForm() {
     const [ firstname, setFirstName ] = useState('')
     const [ lastname, setLastName ] = useState('')
-    const [ employeeID, setEmployeeID ] = useState('')
+    const [ address, setAddress ] = useState('')
+    const [ phonenumber, setPhoneNumber ] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
@@ -12,16 +13,17 @@ function SalespersonForm() {
         const data = {
             "first_name" : firstname,
             "last_name" : lastname,
-            "employee_id" : employeeID
+            "address" : address,
+            "phone_number" : phonenumber
         }
         try {
-            const request = fetch("http://localhost:8090/api/salespeople/", {
+            const request = fetch("http://localhost:8090/api/customers/", {
                 method: "POST",
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(data)
             })
             resetForm()
-            navigate("/salespeople")
+            navigate("/customers")
         } catch(error){
             console.error(error)
         }
@@ -35,20 +37,26 @@ function SalespersonForm() {
         setLastName(event.target.value)
     }
 
-    const handleEmployeeIDChange = (event) => {
-        setEmployeeID(event.target.value)
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value)
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value)
     }
 
     const resetForm = () => {
         setFirstName("")
         setLastName("")
-        setEmployeeID("")
+        setAddress("")
+        setPhoneNumber("")
     }
+
 
     return (
         <div className="shadow p-4 mt-4 ">
             <form onSubmit={handleSubmit}>
-                <h1>Add a Salesperson</h1>
+                <h1>Add a Customer</h1>
                 <div className="form-floating mb-3">
                     <input
                         onChange={handleFirstNameChange}
@@ -75,15 +83,28 @@ function SalespersonForm() {
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleEmployeeIDChange}
+                        onChange={handleAddressChange}
                         required
-                        placeholder="Employee ID..."
+                        placeholder="Address..."
                         type="text"
                         className="form-control"
-                        id="employeeID"
-                        value={employeeID}
+                        id="address"
+                        value={address}
                     />
-                    <label htmlFor="employeeID" className="form-label">Employee ID...</label>
+                    <label htmlFor="address" className="form-label">Address...</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        onChange={handlePhoneNumberChange}
+                        required
+                        placeholder="Phone Number..."
+                        type="tel"
+                        pattern="[0-9]{10}"
+                        className="form-control"
+                        id="phonenumber"
+                        value={phonenumber}
+                    />
+                    <label htmlFor="phonenumber" className="form-label">Phone Number...</label>
                 </div>
                 <button type="submit" className="btn btn-primary">Create</button>
             </form>
@@ -91,4 +112,4 @@ function SalespersonForm() {
     )
 }
 
-export default SalespersonForm;
+export default CustomersForm;

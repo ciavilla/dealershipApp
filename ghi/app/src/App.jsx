@@ -9,6 +9,8 @@ import AutomobilesList from "./AutomobilesList";
 import CreateInventory from "./CreateInventory";
 import SalespersonList from "./SalespersonList";
 import SalespersonForm from "./SalespersonForm";
+import CustomersList from "./CustomersList";
+import CustomersForm from "./CustomersForm";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
 					<Route path="/automobiles/create/" element={<CreateInventory />} />
 					<Route path="/salespeople" element={<SalespersonList />} />
 					<Route path="/salespeople/create/" element={<SalespersonForm />} />
+					<Route path="/customers" element={<CustomersList />} />
+					<Route path="/customers/create/" element={<CustomersForm />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
