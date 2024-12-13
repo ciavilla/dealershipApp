@@ -7,6 +7,8 @@ Team:
 
 ## Design
 
+![IMG](./images/CarCar.png)
+
 ## Service microservice
 
 Explain your models and integration with the inventory
