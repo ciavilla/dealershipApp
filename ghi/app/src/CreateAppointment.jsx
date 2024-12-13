@@ -57,29 +57,32 @@ function CreateServiceAppointment() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2 className="mb-4">Create Service Appointment</h2>
-            <div className="mb-4">
-                <label htmlFor="vin" className="form-label">VIN</label>
-                <input
+
+            <form onSubmit={handleSubmit}>
+                <h2 className="mb-4">Create Service Appointment</h2>
+                <div className="mb-3">
+                <label htmlFor="vin" className="form-label">Vin</label>
+                    <input
                     type="text"
                     id="vin"
+                    placeholder="vin"
                     value={vin}
                     onChange={(e) => setVin(e.target.value)}
                     required
-                />
-            </div>
-            <div className="mb-4">
+                    />
+                </div>
+            <div className="mb-3">
                 <label htmlFor="customer" className="form-label">Customer</label>
                 <input
                     type="text"
                     id="customer"
+                    placeholder="customer"
                     value={customer}
                     onChange={(e) => setCustomer(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
                 <label htmlFor="date" className="form-label">Date</label>
                 <input
                     type="date"
@@ -89,7 +92,7 @@ function CreateServiceAppointment() {
                     required
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
                 <label htmlFor="time" className="form-label">Time</label>
                 <input
                     type="time"
@@ -99,7 +102,7 @@ function CreateServiceAppointment() {
                     required
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
                 <label htmlFor="technician" className="form-label">Technician</label>
                 <select
                     id="technician"
@@ -115,7 +118,7 @@ function CreateServiceAppointment() {
                     ))}
                 </select>
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
                 <label htmlFor="reason" className="form-label">Reason</label>
                 <textarea
                     id="reason"
@@ -126,6 +129,7 @@ function CreateServiceAppointment() {
             </div>
             <button type="submit" className="btn btn-primary">Create</button>
         </form>
+
     );
 }
 
