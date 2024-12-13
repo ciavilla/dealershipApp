@@ -12,6 +12,14 @@ import AddTechnician from "./AddTechnician";
 import CreateServiceAppointment from "./CreateAppointment";
 import ServiceAppointments from "./ServiceAppointments";
 import ServiceHistory from "./ServiceHistory";
+import SalespersonList from "./SalespersonList";
+import SalespersonForm from "./SalespersonForm";
+import CustomersList from "./CustomersList";
+import CustomersForm from "./CustomersForm";
+import SalesList from "./SalesList";
+import SalesForm from "./SalesForm";
+import SalespersonHistoryList from "./SalespersonHistoryList";
+
 
 function App() {
 	return (
@@ -31,6 +39,13 @@ function App() {
 					<Route path="/appointments" element={<ServiceAppointments />} />
 					<Route path="/appointments/create/" element={<CreateServiceAppointment />} />
 					<Route path="/servicehistory/" element={<ServiceHistory />} />
+					<Route path="/salespeople" element={<SalespersonList />} />
+					<Route path="/salespeople/create/" element={<SalespersonForm />} />
+					<Route path="/customers" element={<CustomersList />} />
+					<Route path="/customers/create/" element={<CustomersForm />} />
+					<Route path="/sales" element={<SalesList />} />
+					<Route path="/sales/create" element={<SalesForm />} />
+					<Route path="/sales/history" element={<SalespersonHistoryList />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
