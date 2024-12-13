@@ -25,6 +25,8 @@ function CreateServiceAppointment() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const formattedTime = time.split(":").slice(0, 2).join(":");
+        
         try {
             const response = await fetch("http://localhost:8080/api/appointments/", {
                 method: "POST",
@@ -35,7 +37,7 @@ function CreateServiceAppointment() {
                     vin: vin.trim(),
                     customer: customer.trim(),
                     date: date,
-                    time: time,
+                    time: formattedTime,
                     technician: parseInt(technician, 10),
                     reason: reason.trim(),
                 }),

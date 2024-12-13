@@ -34,5 +34,8 @@ class Appointment(models.Model):
     customer = models.CharField(max_length=200)
     technician = models.ForeignKey(Technician, on_delete=models.CASCADE)
 
+    def is_vip(self):
+        return AutomobileVO.objects.filter(vin=self.vin, sold=True).exists()
+    
     def __str__(self):
         return f"Appointment for {self.vin} with {self.technician}"

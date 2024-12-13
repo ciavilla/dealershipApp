@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from common.json import ModelEncoder
 from .models import Technician, AutomobileVO, Appointment
+from datetime import time
 
 # Create your views here.
 class TechnicianEncoder(ModelEncoder):
@@ -27,17 +28,34 @@ class AutomobileEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
         "date",
         "time",
         "reason",
         "status",
         "vin",
         "customer",
-        "technician"
+        "technician",
+        "is_vip"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
     }
+
+    def default(self, o):
+        if isinstance(o, time):
+            return o.strftime("%H:%M:%S")
+
+        if isinstance(o, Appointment):
+
+            return {
+                **super().default(o),
+                "is_vip": o.is_vip()
+            }
+        return super().default(o)
+
+
+
 
 
 #Technician Views
@@ -68,7 +86,8 @@ def technician_detail(request, id):
 @require_http_methods(["GET", "POST"])
 def appointment_list(request):
     if request.method == "GET":
-        appointments = Appointment.objects.all()
+        status = request.GET.get("status", "scheduled")
+        appointments = Appointment.objects.filter(status=status)
         return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder)
     elif request.method == "POST":
         try:
@@ -86,12 +105,11 @@ def appointment_list(request):
 @require_http_methods(["DELETE", "PUT"])
 def appointment_detail(request, id, action=None):
     try:
+        appointment = Appointment.objects.get(id=id)
         if request.method == "DELETE":
-            appointment = Appointment.objects.get(id=id)
             appointment.delete()
             return HttpResponse(status=204)
         elif request.method == "PUT":
-            appointment = Appointment.objects.get(id=id)
             if action == "cancel":
                 appointment.status = "canceled"
             elif action == "finish":
@@ -102,3 +120,5 @@ def appointment_detail(request, id, action=None):
             return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
     except Appointment.DoesNotExist:
         return JsonResponse({"error": "Appointment not found"}, status=404)
+
+

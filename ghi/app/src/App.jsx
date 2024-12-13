@@ -10,6 +10,7 @@ import CreateInventory from "./CreateInventory";
 import TechnicianList from "./ListTechnicians";
 import AddTechnician from "./AddTechnician";
 import CreateServiceAppointment from "./CreateAppointment";
+import ServiceAppointments from "./ServiceAppointments";
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/automobiles/create/" element={<CreateInventory />} />
 					<Route path="/technicians" element={<TechnicianList />} />
 					<Route path="/technicians/create/" element={<AddTechnician />} />
+					<Route path="/appointments" element={<ServiceAppointments />} />
 					<Route path="/appointments/create/" element={<CreateServiceAppointment />} />
 
 				</Routes>
