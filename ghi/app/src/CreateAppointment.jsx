@@ -26,7 +26,7 @@ function CreateServiceAppointment() {
         event.preventDefault();
 
         const formattedTime = time.split(":").slice(0, 2).join(":");
-        
+
         try {
             const response = await fetch("http://localhost:8080/api/appointments/", {
                 method: "POST",
@@ -58,7 +58,7 @@ function CreateServiceAppointment() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2 className="mb-4">Creae Service Appointment</h2>
+            <h2 className="mb-4">Create Service Appointment</h2>
             <div className="mb-4">
                 <label htmlFor="vin" className="form-label">VIN</label>
                 <input
