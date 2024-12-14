@@ -31,33 +31,37 @@ function AddTechnician() {
     };
 
     return (
+        <div className="shadow p-4 mt-4">
         <form onSubmit={handleSubmit}>
             <h2 className="mb-4">Add A Technician</h2>
-            <div className="mb-4">
-                <label htmlFor="firstname" className="form-label">First Name</label>
+            <div className="form-floating mb-3">
+                <label htmlFor="firstname" className="form-label">First Name...</label>
                 <input
                     type="text"
                     id="firstname"
                     value={firstName}
+                    className="form-control"
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-4">
-                <label htmlFor="lastname" className="form-label">Last Name</label>
+            <div className="form-floating mb-3">
+                <label htmlFor="lastname" className="form-label">Last Name...</label>
                 <input
                     type="text"
                     id="lastname"
                     value={lastName}
+                    className="form-control"
                     onChange={(e) => setLastName(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-4">
+            <div className="form-floating mb-3">
                 <label htmlFor="employeeId" className="form-label">Employee Id</label>
                 <input
                     type="number"
                     id="employeeId"
+                    className="form-control"
                     value={employeeId}
                     onChange={(e) => setEmployeeId(e.target.value)}
                     required
@@ -65,6 +69,7 @@ function AddTechnician() {
             </div>
             <button type="submit" className="btn btn-primary">Create</button>
         </form>
+        </div>
     )
 }
 

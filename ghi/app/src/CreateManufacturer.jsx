@@ -21,10 +21,11 @@ function CreateManufacturer() {
     };
 
     return (
+        <div className="shadow p-4 mt-4">
             <form onSubmit={handleSubmit}>
                 <h2 className="mb-4">Create A Manufacturer</h2>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
+                <div className="form-floating mb-3">
+                    <label htmlFor="name" className="form-label">Name...</label>
                     <input
                         type="text"
                         id="name"
@@ -36,6 +37,7 @@ function CreateManufacturer() {
                 </div>
                 <button type="submit" className="btn btn-primary">Create</button>
             </form>
+        </div>
 
     );
 }

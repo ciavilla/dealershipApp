@@ -57,47 +57,52 @@ function CreateInventory() {
 
 
     return (
+        <div className="shadow p-4 mt-4">
         <form onSubmit={handleSubmit}>
             <h2 className="mb-4">Add New Inventory</h2>
-            <div className="mb-3">
+            <div className="form-floating mb-3">
                 <label htmlFor="color" className="form-label">Color</label>
                 <input
                     type="text"
                     id="color"
                     value={color}
+                    className="form-control"
                     onChange={(e) => setColor(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-3">
+            <div className="form-floating mb-3">
                 <label htmlFor="year" className="form-label">Year</label>
                 <input
                     type="number"
                     id="year"
                     value={year}
+                    className="form-control"
                     onChange={(e) => setYear(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-3">
+            <div className="form-floating mb-3">
                 <label htmlFor="vin" className="form-label">VIN</label>
                 <input
                     type="text"
                     id="vin"
                     value={vin}
+                    className="form-control"
                     onChange={(e) => setVin(e.target.value)}
                     required
                 />
             </div>
-            <div className="mb-3">
-                <label htmlFor="model" className="form-label">Model</label>
+            <div className="form-floating mb-3">
+                <label htmlFor="model" className="form-label"></label>
                 <select
                     id="model"
                     value={model}
+                    className="form-control"
                     onChange={(e) => setModel(e.target.value)}
                     required
                 >
-                    <option value="">Select a model</option>
+                    <option value="">Select Model</option>
                     {models.map((model) => (
                         <option key={model.id} value={model.id}>
                             {model.name}
@@ -107,6 +112,7 @@ function CreateInventory() {
             </div>
             <button type="submit" className="btn btn-primary">Add Vehicle</button>
         </form>
+        </div>
     );
 }
 
