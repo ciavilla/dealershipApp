@@ -24,6 +24,7 @@ def api_automobiles(request):
             model_id = content["model_id"]
             model = VehicleModel.objects.get(pk=model_id)
             content["model"] = model
+            
             auto = Automobile.objects.create(**content)
             return JsonResponse(
                 auto,
@@ -89,7 +90,7 @@ def api_manufacturers(request):
     if request.method == "GET":
         manufacturers = Manufacturer.objects.all()
         return JsonResponse(
-            {"manufacturers": manufacturers},
+            {"manufacturers": list(manufacturers)},
             encoder=ManufacturerEncoder,
         )
     else:
@@ -103,7 +104,7 @@ def api_manufacturers(request):
             )
         except:
             response = JsonResponse(
-                {"message": "Could not create the manufacturer"}
+                {"message": "Invalid JSON format"}
             )
             response.status_code = 400
             return response

@@ -1,40 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CreateInventory() {
     const [color, setColor] = useState("");
     const [year, setYear] = useState("");
     const [vin, setVin] = useState("");
-    const [modelId, setModelId] = useState("");
+    const [model, setModel] = useState("");
+    const [models, setModels] = useState([]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    useEffect(() => {
+        const fetchModels = async () => {
+            try {
+                const response = await fetch("http://localhost:8100/api/models/");
+                    if (response.ok) {
+                        const data = await response.json();
+                        setModels(data.models);
+                    } else {
+                        console.error("Failed to fetch models");
+                    }
+                } catch (error) {
+                        console.error("Error fetching models:", error);
+                    }
+                };
 
-        try {
-            const response = await fetch("http://localhost:8100/api/automobiles/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    color,
-                    year: parseInt(year, 10),
-                    vin,
-                    model_id: parseInt(modelId, 10),
-                }),
-            });
+                fetchModels();
+            }, []);
 
-            if (response.ok) {
+            const handleSubmit = async (event) => {
+                event.preventDefault();
 
-                setColor("");
-                setYear("");
-                setVin("");
-                setModelId("");
+                try {
+                    const response = await fetch("http://localhost:8100/api/automobiles/", {
+                        method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        color,
+                        year: parseInt(year, 10),
+                        vin,
+                        model_id: parseInt(model, 10),
+                    }),
+                });
+
+                if (response.ok) {
+                    setColor("");
+                    setYear("");
+                    setVin("");
+                    setModel("");
+                } else {
+                    console.error("Failed to create automobile");
+                }
+            } catch (error) {
+                console.error("Error creating automobile:", error);
             }
+        };
 
-        } catch (error) {
-            console.error("Error creating automobile:", error);
-        }
-    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -70,14 +90,20 @@ function CreateInventory() {
                 />
             </div>
             <div className="mb-3">
-                <label htmlFor="modelId" className="form-label">Model ID</label>
-                <input
-                    type="number"
-                    id="modelId"
-                    value={modelId}
-                    onChange={(e) => setModelId(e.target.value)}
+                <label htmlFor="model" className="form-label">Model</label>
+                <select
+                    id="model"
+                    value={model}
+                    onChange={(e) => setModel(e.target.value)}
                     required
-                />
+                >
+                    <option value="">Select a model</option>
+                    {models.map((model) => (
+                        <option key={model.id} value={model.id}>
+                            {model.name}
+                        </option>
+                    ))}
+                </select>
             </div>
             <button type="submit" className="btn btn-primary">Add Vehicle</button>
         </form>

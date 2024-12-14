@@ -28,7 +28,30 @@ CarCar entails 3 microservices Inventory, Services and Sales. They all interact 
 ## Integration
 
 
-### URLs and Ports
+### URLs and Ports to send and view data with insomnia or your browser.
+### Manufacturers:
+| List Manufacturers | GET |
+http://localhost:8100/api/manufacturers/
+| Create Manufacturer | POST |
+http://localhost:8100/api/manufacturers/
+| Get Details of Manufacturer| Get |
+http://localhost:8100/api/manufacturers/:id/
+| Update a Manufacturer | PUT |
+http://localhost:8100/api/manufacturers/:id/
+| Delete a Manufacturer | DELETE |
+http://localhost:8100/api/manufacturers/:id/
+
+### Automobiles:
+| List Automobiles | GET |
+http://localhost:8100/api/automobiles/
+| Create Automobile | CREATE |
+http://localhost:8100/api/automobiles/
+| Get a specific Automobile | GET |
+http://localhost:8100/api/automobiles/:vin/
+| Update a Automobile | PUT |
+http://localhost:8100/api/automobiles/:vin/
+| Delete a Automobile | DELETE |
+http://localhost:8100/api/automobiles/:vin/
 
 ### Technicians:
 | List technicians | GET |
@@ -47,7 +70,7 @@ http://localhost:8080/api/appointments/
 | Delete Appointment | DELETE |
 http://localhost:8080/api/technicians/id/
 | Update Status finished | PUT |
-http://localhost:8080/api/appointments/3/cancel/
+http://localhost:8080/api/appointments/3/finish/
 | Update Status canceled | PUT |
 http://localhost:8080/api/appointments/3/cancel/
 
