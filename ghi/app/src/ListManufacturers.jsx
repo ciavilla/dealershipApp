@@ -21,11 +21,11 @@ function ListManufacturers() {
     }, []);
 
     return (
-        <div className="container my-4">
-            <h1 className="mb-4" >Manufacturers</h1>
-            <ul>
+        <div>
+            <h1 className=" mb-4">Manufacturers</h1>
+            <ul className="list-group">
                 {manufacturers.map((manufacturer) => (
-                    <li key={manufacturer.id}>{manufacturer.name}</li>
+                    <li className="list-group-item" key={manufacturer.id}>{manufacturer.name}</li>
                 ))}
             </ul>
         </div>
