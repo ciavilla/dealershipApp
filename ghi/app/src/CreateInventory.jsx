@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateInventory() {
     const [color, setColor] = useState("");
     const [year, setYear] = useState("");
     const [vin, setVin] = useState("");
     const [modelId, setModelId] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,6 +31,8 @@ function CreateInventory() {
                 setYear("");
                 setVin("");
                 setModelId("");
+                alert("Inventory created successfully!");
+                navigate("/automobiles");
             }
 
         } catch (error) {

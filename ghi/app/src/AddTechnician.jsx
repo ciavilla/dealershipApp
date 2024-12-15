@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddTechnician() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [employeeId, setEmployeeId] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,6 +26,8 @@ function AddTechnician() {
                 setFirstName("");
                 setLastName("");
                 setEmployeeId("");
+                alert("Technician Created successfully!");
+                navigate("/technicians");
             }
         } catch (error) {
             console.error("Error creating technician:", error);

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateServiceAppointment() {
     const [vin, setVin] = useState("");
@@ -8,6 +9,7 @@ function CreateServiceAppointment() {
     const [technician, setTechnician] = useState("");
     const [reason, setReason] = useState("");
     const [technicians, setTechnicians] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTechnicians = async () => {
@@ -50,6 +52,8 @@ function CreateServiceAppointment() {
                 setTime("");
                 setTechnician("");
                 setReason("");
+                alert("Appointment created successfully!");
+                navigate("/appointments");
             }
         } catch (error) {
             console.error("Error creating appointment:", error);

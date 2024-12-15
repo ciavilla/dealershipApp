@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateManufacturer() {
     const [name, setName] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,6 +16,8 @@ function CreateManufacturer() {
 
             if (response.ok) {
                 setName("");
+                alert("Manufacturer Cretated Successfully!")
+                navigate("/manufacturers");
             }
          } catch (error) {
             console.error("Error creating manufacturer", error);
