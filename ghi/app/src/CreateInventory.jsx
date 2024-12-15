@@ -10,6 +10,7 @@ function CreateInventory() {
     const [model, setModel] = useState("");
     const [models, setModels] = useState([]);
 
+
     useEffect(() => {
         const fetchModels = async () => {
             try {
@@ -34,7 +35,7 @@ function CreateInventory() {
                 setColor("");
                 setYear("");
                 setVin("");
-                setModelId("");
+                setModel("");
                 alert("Inventory created successfully!");
                 navigate("/automobiles");
                 try {
