@@ -4,7 +4,7 @@ CarCar is a application for a car dealership to manage all entities of a car dea
 Team:
 
 * Ciera Villalpando - Service Microservice
-* David - Sales Microservice
+* David Iukuridze- Sales Microservice
 
 ## How to Run this App
 **Ensure that you have Docker, Git, and Node.js 18.2 or above**
@@ -281,5 +281,3 @@ Return response Apoointments List:
 	]
 }
 ```
-
-
