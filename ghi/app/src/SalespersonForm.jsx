@@ -2,23 +2,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SalespersonForm() {
-    const [ firstname, setFirstName ] = useState('')
-    const [ lastname, setLastName ] = useState('')
-    const [ employeeID, setEmployeeID ] = useState('')
+    const [ formData, setFormData ] = useState({
+        first_name: "",
+        last_name: "",
+        employee_id: ""
+    })
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const data = {
-            "first_name" : firstname,
-            "last_name" : lastname,
-            "employee_id" : employeeID
-        }
         try {
             const request = fetch("http://localhost:8090/api/salespeople/", {
                 method: "POST",
                 headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             })
             resetForm()
             navigate("/salespeople")
@@ -27,23 +24,24 @@ function SalespersonForm() {
         }
     }
 
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value)
-    }
-
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value)
-    }
-
-    const handleEmployeeIDChange = (event) => {
-        setEmployeeID(event.target.value)
+    const handleFormChange = (event) => {
+        const value = event.target.value
+        const inputName = event.target.name
+        setFormData({
+            ...formData,
+            [inputName]: value
+        })
     }
 
     const resetForm = () => {
-        setFirstName("")
-        setLastName("")
-        setEmployeeID("")
+       setFormData({
+        first_name: "",
+        last_name: "",
+        employee_id: ""
+       })
     }
+
+    const { first_name, last_name, employee_id } = formData
 
     return (
         <div className="shadow p-4 mt-4 ">
@@ -51,37 +49,40 @@ function SalespersonForm() {
                 <h1>Add a Salesperson</h1>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleFirstNameChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="First name..."
                         type="text"
                         className="form-control"
-                        id="firstname"
-                        value={firstname}
+                        id="first_name"
+                        value={first_name}
+                        name="first_name"
                     />
                     <label htmlFor="firstname">First Name...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleLastNameChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="Last name..."
                         type="text"
                         className="form-control"
-                        id="lastname"
-                        value={lastname}
+                        id="last_name"
+                        value={last_name}
+                        name="last_name"
                     />
                     <label htmlFor="lastname" className="form-label">Last name...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleEmployeeIDChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="Employee ID..."
                         type="text"
                         className="form-control"
-                        id="employeeID"
-                        value={employeeID}
+                        id="employee_id"
+                        value={employee_id}
+                        name="employee_id"
                     />
                     <label htmlFor="employeeID" className="form-label">Employee ID...</label>
                 </div>

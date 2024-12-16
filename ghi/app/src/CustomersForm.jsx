@@ -2,25 +2,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CustomersForm() {
-    const [ firstname, setFirstName ] = useState('')
-    const [ lastname, setLastName ] = useState('')
-    const [ address, setAddress ] = useState('')
-    const [ phonenumber, setPhoneNumber ] = useState('')
+    const [ formData, setFormData ] = useState({
+        first_name: "",
+        last_name: "",
+        address: "",
+        phone_number: ""
+    })
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const data = {
-            "first_name" : firstname,
-            "last_name" : lastname,
-            "address" : address,
-            "phone_number" : phonenumber
-        }
         try {
             const request = fetch("http://localhost:8090/api/customers/", {
                 method: "POST",
                 headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             })
             resetForm()
             navigate("/customers")
@@ -29,29 +25,25 @@ function CustomersForm() {
         }
     }
 
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value)
-    }
-
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value)
-    }
-
-    const handleAddressChange = (event) => {
-        setAddress(event.target.value)
-    }
-
-    const handlePhoneNumberChange = (event) => {
-        setPhoneNumber(event.target.value)
+    const handleFormChange = (event) => {
+        const value = event.target.value
+        const inputName = event.target.name
+        setFormData({
+            ...formData,
+            [inputName]: value
+        })
     }
 
     const resetForm = () => {
-        setFirstName("")
-        setLastName("")
-        setAddress("")
-        setPhoneNumber("")
+        setFormData({
+            first_name: "",
+            last_name: "",
+            address: "",
+            phone_number: ""
+        })
     }
 
+    const { first_name, last_name, address, phone_number } = formData
 
     return (
         <div className="shadow p-4 mt-4 ">
@@ -59,50 +51,54 @@ function CustomersForm() {
                 <h1>Add a Customer</h1>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleFirstNameChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="First name..."
                         type="text"
                         className="form-control"
-                        id="firstname"
-                        value={firstname}
+                        id="first_name"
+                        value={first_name}
+                        name="first_name"
                     />
                     <label htmlFor="firstname">First Name...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleLastNameChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="Last name..."
                         type="text"
                         className="form-control"
-                        id="lastname"
-                        value={lastname}
+                        id="last_name"
+                        value={last_name}
+                        name="last_name"
                     />
                     <label htmlFor="lastname" className="form-label">Last name...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleAddressChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="Address..."
                         type="text"
                         className="form-control"
                         id="address"
                         value={address}
+                        name="address"
                     />
                     <label htmlFor="address" className="form-label">Address...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handlePhoneNumberChange}
+                        onChange={handleFormChange}
                         required
                         placeholder="Phone Number..."
                         type="tel"
                         pattern="[0-9]{10}"
                         className="form-control"
-                        id="phonenumber"
-                        value={phonenumber}
+                        id="phone_number"
+                        value={phone_number}
+                        name="phone_number"
                     />
                     <label htmlFor="phonenumber" className="form-label">Phone Number...</label>
                 </div>

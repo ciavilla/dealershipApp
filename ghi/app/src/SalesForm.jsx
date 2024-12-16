@@ -3,28 +3,23 @@ import { useNavigate } from "react-router-dom";
 
 function SalesForm() {
     const [ automobiles, setAutomobiles ] = useState([])
-    const [ autombileVIN, setAutombileVIN ] = useState("")
     const [ salesPeople, setSalesPeople ] = useState([])
-    const [ salesPerson, setSalesPerson ] = useState("")
     const [ customers, setCustomers ] = useState([])
-    const [ customer, setCustomer ] = useState("")
-    const [ price, setPrice ] = useState("")
+    const [ formData, setFormData ] = useState({
+        automobile: "",
+        salesperson: "",
+        customer: "",
+        price: ""
+    })
     const navigate = useNavigate()
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = {
-            "automobile" : autombileVIN,
-            "salesperson" : salesPerson,
-            "customer" : customer,
-            "price" : price
-        }
         const url = "http://localhost:8090/api/sales/"
         try {
             const response = await fetch(url, {
                 method : "POST",
-                body : JSON.stringify(data),
+                body : JSON.stringify(formData),
                 headers : {"Content-Type": "application/json"}
             })
             if (response.ok) {
@@ -36,7 +31,6 @@ function SalesForm() {
         }catch(error){
             console.error(error)
         }
-
     }
 
     const fetchAutomobileVIN = async () => {
@@ -83,29 +77,25 @@ function SalesForm() {
         fetchCustomers()
     }, [])
 
-
-    const handleAutomobilesVIN = (event) => {
-        setAutombileVIN(event.target.value)
-    }
-
-    const handleSalesPerson = (event) => {
-        setSalesPerson(event.target.value)
-    }
-
-    const handleCustomer = (event) => {
-        setCustomer(event.target.value)
-    }
-
-    const handlePrice = (event) => {
-        setPrice(event.target.value)
+    const handleFormChange = (event) => {
+        const value = event.target.value
+        const inputName = event.target.name
+        setFormData({
+            ...formData,
+            [inputName]: value
+        })
     }
 
     const resetForm = () => {
-        setAutombileVIN("")
-        setSalesPerson("")
-        setCustomer("")
-        setPrice("")
+        setFormData({
+            automobile: "",
+            salesperson: "",
+            customer: "",
+            price: ""
+        })
     }
+
+    const { automobile, salesperson, customer, price } = formData
 
     return (
         <div className="shadow p-4 mt-4 ">
@@ -114,12 +104,12 @@ function SalesForm() {
                 <div className="mb-3">
                     <label htmlFor="automibileVIN" className="form-label">Automobile VIN</label>
                     <select
-                        onChange={handleAutomobilesVIN}
+                        onChange={handleFormChange}
                         required
-                        name="automobileVIN"
-                        id="automobileVIN"
                         className="form-select"
-                        value={autombileVIN}
+                        id="automobileVIN"
+                        value={automobile}
+                        name="automobile"
                     >
                         <option >Choose an automobile VIN...</option>
                         {automobiles.map((automobile)=>
@@ -129,12 +119,12 @@ function SalesForm() {
                 <div className="mb-3">
                     <label htmlFor="salesperson" className="form-label">Salesperson</label>
                     <select
-                        onChange={handleSalesPerson}
+                        onChange={handleFormChange}
                         required
-                        name="salesperson"
-                        id="salesperson"
                         className="form-select"
-                        value={salesPerson}
+                        id="salesperson"
+                        value={salesperson}
+                        name="salesperson"
                     >
                         <option >Choose a salesperson...</option>
                         {salesPeople.map((person)=>
@@ -144,12 +134,12 @@ function SalesForm() {
                 <div className="mb-3">
                     <label htmlFor="customer" className="form-label">Customer</label>
                     <select
-                        onChange={handleCustomer}
+                        onChange={handleFormChange}
                         required
-                        name="customer"
-                        id="customer"
                         className="form-select"
+                        id="customer"
                         value={customer}
+                        name="customer"
                     >
                         <option >Choose a customer...</option>
                         {customers.map((customer)=>
@@ -159,7 +149,7 @@ function SalesForm() {
                 <div className="mb-3">
                     <label htmlFor="price" className="form-label">Price (#.##)</label>
                     <input
-                        onChange={handlePrice}
+                        onChange={handleFormChange}
                         required
                         placeholder="0.00"
                         pattern="^\d+(\.\d{1,2})?$"
@@ -167,6 +157,7 @@ function SalesForm() {
                         className="form-control"
                         id="price"
                         value={price}
+                        name="price"
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Create</button>

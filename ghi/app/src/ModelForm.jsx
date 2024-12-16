@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 function ModelForm() {
     const [ manufacturers, setManufacturers ] = useState([])
-    const [ model, setModel ] = useState("")
-    const [ pictureURL, setPictureURL ] = useState("")
-    const [ selectedManufacturer, setSelectedManufactuere ] = useState("")
+
+    const [ formData, setFormData ] = useState({
+        name : "",
+        picture_url : "",
+        manufacturer_id : ""
+    })
     const navigate = useNavigate()
 
 
@@ -24,16 +27,11 @@ function ModelForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = {
-            "name" : model,
-            "picture_url" : pictureURL,
-            "manufacturer_id" : selectedManufacturer
-        }
         const url = "http://localhost:8100/api/models/"
         try {
             const response = await fetch(url, {
                 method : "POST",
-                body : JSON.stringify(data),
+                body : JSON.stringify(formData),
                 headers : {"Content-Type": "application/json"}
             })
             if (response.ok) {
@@ -45,26 +43,26 @@ function ModelForm() {
         }catch(error){
             console.error(error)
         }
-
     }
 
-    const handleModel = (event) => {
-        setModel(event.target.value)
-    }
-
-    const handlePictureURL = (event) => {
-        setPictureURL(event.target.value)
-    }
-
-    const handleSelectedManufacturer = (event) => {
-        setSelectedManufactuere(event.target.value)
+    const handleFormChange = (event) => {
+        const value = event.target.value
+        const inputName = event.target.name
+        setFormData({
+            ...formData,
+            [inputName]: value
+        })
     }
 
     const resetForm = () => {
-        setModel("")
-        setPictureURL("")
-        setSelectedManufactuere("")
+        setFormData({
+            name : "",
+            picture_url : "",
+            manufacturer_id : ""
+        })
     }
+
+    const { name, picture_url, manufacturer_id } = formData;
 
     return (
         <div className="shadow p-4 mt-4 ">
@@ -72,36 +70,38 @@ function ModelForm() {
                 <h1>Create a vehicle model</h1>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handleModel}
+                        onChange={handleFormChange}
                         required
                         placeholder="Model name..."
                         type="text"
                         className="form-control"
-                        id="model"
-                        value={model}
+                        id="name"
+                        value={name}
+                        name="name"
                     />
                     <label htmlFor="model">Model name...</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input
-                        onChange={handlePictureURL}
+                        onChange={handleFormChange}
                         required
                         placeholder="Picture URL..."
                         type="url"
                         className="form-control"
-                        id="pictureURL"
-                        value={pictureURL}
+                        id="picture_url"
+                        value={picture_url}
+                        name="picture_url"
                     />
                     <label htmlFor="pictureURL" className="form-label">Picture URL...</label>
                 </div>
                 <div className="mb-3">
                     <select
-                        onChange={handleSelectedManufacturer}
+                        onChange={handleFormChange}
                         required
-                        name="manufacturer"
-                        id="manufacturer"
+                        id="manufacturer_id"
                         className="form-select"
-                        value={selectedManufacturer}
+                        value={manufacturer_id}
+                        name="manufacturer_id"
                     >
                         <option >Choose a manufacturer...</option>
                         {manufacturers.map((manufacturer)=>
