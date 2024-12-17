@@ -71,7 +71,7 @@ function CreateInventory() {
         <form onSubmit={handleSubmit}>
             <h2 className="mb-4">Add New Inventory</h2>
             <div className="form-floating mb-3">
-                <label htmlFor="color" className="form-label">Color</label>
+
                 <input
                     type="text"
                     id="color"
@@ -80,9 +80,10 @@ function CreateInventory() {
                     onChange={(e) => setColor(e.target.value)}
                     required
                 />
+                <label htmlFor="color" className="form-label">Color</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="year" className="form-label">Year</label>
+
                 <input
                     type="number"
                     id="year"
@@ -91,9 +92,10 @@ function CreateInventory() {
                     onChange={(e) => setYear(e.target.value)}
                     required
                 />
+                <label htmlFor="year" className="form-label">Year</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="vin" className="form-label">VIN</label>
+
                 <input
                     type="text"
                     id="vin"
@@ -102,9 +104,10 @@ function CreateInventory() {
                     onChange={(e) => setVin(e.target.value)}
                     required
                 />
+                <label htmlFor="vin" className="form-label">VIN</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="model" className="form-label"></label>
+            <label htmlFor="model" className="form-label"></label>
                 <select
                     id="model"
                     value={model}

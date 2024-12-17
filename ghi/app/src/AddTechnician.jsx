@@ -39,7 +39,7 @@ function AddTechnician() {
         <form onSubmit={handleSubmit}>
             <h2 className="mb-4">Add A Technician</h2>
             <div className="form-floating mb-3">
-                <label htmlFor="firstname" className="form-label">First Name...</label>
+
                 <input
                     type="text"
                     id="firstname"
@@ -48,9 +48,10 @@ function AddTechnician() {
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                 />
+                <label htmlFor="firstname" className="form-label">First Name...</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="lastname" className="form-label">Last Name...</label>
+
                 <input
                     type="text"
                     id="lastname"
@@ -59,9 +60,10 @@ function AddTechnician() {
                     onChange={(e) => setLastName(e.target.value)}
                     required
                 />
+                <label htmlFor="lastname" className="form-label">Last Name...</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="employeeId" className="form-label">Employee Id</label>
+
                 <input
                     type="number"
                     id="employeeId"
@@ -70,6 +72,7 @@ function AddTechnician() {
                     onChange={(e) => setEmployeeId(e.target.value)}
                     required
                 />
+                <label htmlFor="employeeId" className="form-label">Employee Id</label>
             </div>
             <button type="submit" className="btn btn-primary">Create</button>
         </form>

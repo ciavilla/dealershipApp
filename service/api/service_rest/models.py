@@ -42,14 +42,10 @@ class Appointment(models.Model):
                 sold=True
             ).exists()
         except Exception as e:
-
-            print(f"Error checking vip status: {e}")
             return False
 
     def save(self, *args, **kwargs):
-        print(f"Checking VIP status for VIN: {self.vin}")
         self.vip_status = self.is_vip()
-        print(f"VIP status for VIN {self.vin}: {self.vip_status}")
         super().save(*args, **kwargs)
 
 

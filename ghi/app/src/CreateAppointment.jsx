@@ -65,7 +65,7 @@ function CreateServiceAppointment() {
             <form onSubmit={handleSubmit}>
                 <h2 className="mb-4">Create Service Appointment</h2>
                 <div className="form-floating mb-3">
-                <label htmlFor="vin" className="form-label">Vin</label>
+
                     <input
                     type="text"
                     id="vin"
@@ -75,9 +75,10 @@ function CreateServiceAppointment() {
                     onChange={(e) => setVin(e.target.value)}
                     required
                     />
+                    <label htmlFor="vin" className="form-label">Vin</label>
                 </div>
             <div className="form-floating mb-3">
-                <label htmlFor="customer" className="form-label">Customer</label>
+
                 <input
                     type="text"
                     id="customer"
@@ -87,9 +88,10 @@ function CreateServiceAppointment() {
                     onChange={(e) => setCustomer(e.target.value)}
                     required
                 />
+                <label htmlFor="customer" className="form-label">Customer</label>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="date" className="form-label"></label>
+
                 <input
                     type="date"
                     id="date"
@@ -98,6 +100,7 @@ function CreateServiceAppointment() {
                     onChange={(e) => setDate(e.target.value)}
                     required
                 />
+                <label htmlFor="date" className="form-label"></label>
             </div>
             <div className="form-floating mb-3">
                 <label htmlFor="time" className="form-label"></label>
@@ -128,7 +131,7 @@ function CreateServiceAppointment() {
                 </select>
             </div>
             <div className="form-floating mb-3">
-                <label htmlFor="reason" className="form-label">Reason</label>
+
                 <textarea
                     id="reason"
                     value={reason}
@@ -136,6 +139,7 @@ function CreateServiceAppointment() {
                     onChange={(e) => setReason(e.target.value)}
                     required
                 />
+                <label htmlFor="reason" className="form-label">Reason</label>
             </div>
             <button type="submit" className="btn btn-primary">Create</button>
         </form>
