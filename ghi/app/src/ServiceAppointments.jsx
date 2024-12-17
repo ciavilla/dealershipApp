@@ -7,13 +7,20 @@ function ServiceAppointments() {
         const url = "http://localhost:8080/api/appointments/";
         try {
             const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error: Status: $resonse.status`);
+            }
             const data = await response.json();
 
-            setAppointments(data.appointments);
+            const activeAppointments = data.appointments.filter(
+                appointment => !["canceled", "finished"].includes(appointment.status)
+            );
+            setAppointments(activeAppointments);
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching appointments", error);
         }
     };
+
 
     const updateAppointmentStatus = async (id, action) => {
         const url = `http://localhost:8080/api/appointments/${id}/${action}/`;
@@ -31,6 +38,7 @@ function ServiceAppointments() {
 
     useEffect(() => {
         fetchAppointments();
+
     }, []);
 
     return (
@@ -50,15 +58,25 @@ function ServiceAppointments() {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map((appointment) => (
-                        <tr key={`appointment-${appointment.id}`}>
+                    {appointments.map((appointment) => {
+
+                        return (
+                        <tr
+                            key={`appointment-${appointment.id}`}
+                            className={appointment.vip_status ? "table-warning" : ""}
+                        >
                             <td>{appointment.vin}</td>
                             <td>{appointment.customer}</td>
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>
                             <td>{`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>
                             <td>{appointment.reason}</td>
-                            <td>{appointment.is_vip ? "Yes" : "No"}</td>
+                            <td>{appointment.vip_status ? (
+                                <span className="badge bg-warning text-dark">VIP</span>
+                                ) : (
+                                    "No"
+                                )}
+                            </td>
                             <td>
                                 <div className="btn-group" role="group">
                                 <button
@@ -76,7 +94,8 @@ function ServiceAppointments() {
                                 </div>
                             </td>
                         </tr>
-                    ))}
+                    );
+})}
                 </tbody>
             </table>
         </div>

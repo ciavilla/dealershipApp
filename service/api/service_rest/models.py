@@ -33,9 +33,26 @@ class Appointment(models.Model):
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
     technician = models.ForeignKey(Technician, on_delete=models.CASCADE)
+    vip_status = models.BooleanField(default=False)
 
     def is_vip(self):
-        return AutomobileVO.objects.filter(vin=self.vin, sold=True).exists()
-    
+        try:
+            return AutomobileVO.objects.filter(
+                vin=self.vin,
+                sold=True
+            ).exists()
+        except Exception as e:
+
+            print(f"Error checking vip status: {e}")
+            return False
+
+    def save(self, *args, **kwargs):
+        print(f"Checking VIP status for VIN: {self.vin}")
+        self.vip_status = self.is_vip()
+        print(f"VIP status for VIN {self.vin}: {self.vip_status}")
+        super().save(*args, **kwargs)
+
+
+
     def __str__(self):
         return f"Appointment for {self.vin} with {self.technician}"

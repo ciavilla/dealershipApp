@@ -36,7 +36,7 @@ class AppointmentEncoder(ModelEncoder):
         "vin",
         "customer",
         "technician",
-        "is_vip"
+        "vip_status"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
@@ -47,7 +47,6 @@ class AppointmentEncoder(ModelEncoder):
             return o.strftime("%H:%M:%S")
 
         if isinstance(o, Appointment):
-
             return {
                 **super().default(o),
                 "is_vip": o.is_vip()
@@ -86,14 +85,25 @@ def technician_detail(request, id):
 @require_http_methods(["GET", "POST"])
 def appointment_list(request):
     if request.method == "GET":
+
         status = request.GET.get("status", "scheduled")
-        appointments = Appointment.objects.filter(status=status)
+
+        if status =="scheduled":
+            appointments = Appointment.objects.filter(status="scheduled")
+        else:
+            appointments = Appointment.objects.filter(status=status)
+
         return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder)
     elif request.method == "POST":
         try:
             content = json.loads(request.body)
             technician_id = content.get("technician")
             content["technician"] = Technician.objects.get(id=technician_id)
+
+            vin = content.get("vin")
+            if not AutomobileVO.objects.filter(vin=vin).exists():
+                return JsonResponse({"error": f"VIN {vin} not found in AutomobileVO"}, status=400)
+
             appointment = Appointment.objects.create(**content)
             return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
         except Technician.DoesNotExist:
@@ -107,8 +117,8 @@ def appointment_detail(request, id, action=None):
     try:
         appointment = Appointment.objects.get(id=id)
         if request.method == "DELETE":
-            appointment.delete()
-            return HttpResponse(status=204)
+            return JsonResponse({"error": "Appointments are not deleted only updated"}, status=400)
+
         elif request.method == "PUT":
             if action == "cancel":
                 appointment.status = "canceled"
