@@ -16,7 +16,6 @@ function CreateManufacturer() {
 
             if (response.ok) {
                 setName("");
-                alert("Manufacturer Cretated Successfully!")
                 navigate("/manufacturers");
             }
          } catch (error) {

@@ -36,7 +36,6 @@ function CreateInventory() {
                 setYear("");
                 setVin("");
                 setModel("");
-                alert("Inventory created successfully!");
                 navigate("/automobiles");
                 try {
                     const response = await fetch("http://localhost:8100/api/automobiles/", {

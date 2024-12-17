@@ -23,17 +23,19 @@ def poll():
             response = requests.get(url)
             data = response.json()
 
-            for auto in data.get("automobiles", []):
-                vin = auto["vin"]
-                sold = auto["sold"]
-                AutomobileVO.objects.update_or_create(vin=vin, defaults={"sold": sold})
+            if "autos" in data:
+
+                for auto in data ["autos"]:
+                    vin = auto["vin"]
+                    sold = auto["sold"]
+                    AutomobileVO.objects.update_or_create(vin=vin, defaults={"sold": sold}
+                    )
 
         except Exception as e:
             traceback.print_exc()
             print(e, file=sys.stderr)
 
         time.sleep(60)
-
 
 if __name__ == "__main__":
     poll()

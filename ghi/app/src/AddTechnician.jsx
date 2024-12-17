@@ -26,7 +26,6 @@ function AddTechnician() {
                 setFirstName("");
                 setLastName("");
                 setEmployeeId("");
-                alert("Technician Created successfully!");
                 navigate("/technicians");
             }
         } catch (error) {

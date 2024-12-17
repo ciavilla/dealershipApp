@@ -52,7 +52,6 @@ function CreateServiceAppointment() {
                 setTime("");
                 setTechnician("");
                 setReason("");
-                alert("Appointment created successfully!");
                 navigate("/appointments");
             }
         } catch (error) {
