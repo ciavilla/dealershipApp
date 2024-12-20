@@ -89,7 +89,11 @@ function ServiceHistory() {
                         {filteredAppointments.map((appointment) => (
                             <tr key={`appointment-${appointment.id}`}>
                                 <td>{appointment.vin}</td>
-                                <td>{appointment.is_vip ? "Yes" : "No"}</td>
+                                <td>{appointment.vip_status ? (
+                                <span className="badge bg-warning text-dark">VIP</span>
+                                ) : (
+                                    "No"
+                                )}</td>
                                 <td>{appointment.customer}</td>
                                 <td>{appointment.date}</td>
                                 <td>{appointment.time}</td>

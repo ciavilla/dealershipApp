@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 function SalespersonList() {
     const [ salespeople, setSalespeople ] = useState([])
 
-    const handleFetch = async (event) => {
+    const handleFetch = async () => {
         try {
             const response = await fetch('http://localhost:8090/api/salespeople/');
             const { salespeople } = await response.json();
@@ -12,6 +12,23 @@ function SalespersonList() {
             console.error(error)
         }
     }
+
+    const deleteSalesperson = async (id) => {
+        const url = `http://localhost:8090/api/salespeople/${id}/`;
+        try {
+            const response = await fetch(url, { method: "DELETE" });
+            if (!response.ok) {
+                throw new Error("Failed to delete salesperson");
+            }
+            // Update state to remove the deleted salesperson
+            setSalespeople((prevSalespeople) =>
+                prevSalespeople.filter((salesperson) => salesperson.id !== id)
+            );
+        } catch (error) {
+            console.error("Error deleting salesperson:", error);
+        }
+    };
+
 
     useEffect(()=>{handleFetch()}, [])
 
@@ -32,6 +49,12 @@ function SalespersonList() {
                         <td>{salesperson.employee_id}</td>
                         <td>{salesperson.first_name}</td>
                         <td>{salesperson.last_name}</td>
+                        <button
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => deleteSalesperson(salesperson.id)}
+                                >
+                                    Delete
+                                </button>
                         </tr>
                     )}
                 </tbody>

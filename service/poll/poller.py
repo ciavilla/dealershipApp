@@ -22,13 +22,12 @@ def poll():
             url = 'http://inventory-api:8000/api/automobiles/'
             response = requests.get(url)
             data = response.json()
-
-            if "autos" in data:
-
-                for auto in data ["autos"]:
+            for auto in data ["autos"]:
                     vin = auto["vin"]
                     sold = auto["sold"]
-                    AutomobileVO.objects.update_or_create(vin=vin, defaults={"sold": sold}
+                    AutomobileVO.objects.update_or_create(
+                         vin=vin,
+                         defaults={"sold": sold}
                     )
 
         except Exception as e:

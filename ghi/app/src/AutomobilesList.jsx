@@ -13,13 +13,29 @@ function ModelList() {
         } catch(error) {
             console.error(error)
         }
+    };
 
-    }
+    const deleteAuto = async (vin) => {
+        const url = `http://localhost:8100/api/automobiles/${vin}/`;
+        try {
+            const response = await fetch(url, { method: "DELETE" });
+            if (response.ok) {
+                setAutos(autos.filter((auto) => auto.vin !== vin));
+            } else {
+                console.error("Failed to delete automobile.");
+            }
+        } catch (error) {
+                console.error(error);
+            }
+    };
+
+
+
     useEffect(()=>{fetchModels()},[]);
 
     return (
         <div>
-            <h1>Models</h1>
+            <h1>Automobiles</h1>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -40,6 +56,11 @@ function ModelList() {
                             <td scope="col">{auto.model.name}</td>
                             <td scope="col">{auto.model.manufacturer.name}</td>
                             <td scope="col">{auto.sold ? "Yes" : "No"}</td>
+                            <td>
+                            <button className="btn btn-danger btn-sm" onClick={() => deleteAuto(auto.vin)}>
+                                Delete
+                            </button>
+                            </td>
                         </tr>
                     )}
                 </tbody>

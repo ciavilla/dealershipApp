@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-md navbar-dark bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">CarCar</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,16 +44,7 @@ function Nav() {
               <NavLink to="/servicehistory/" className="nav-link">Service History</NavLink>
             </li>
             <li>
-              <NavLink to="/salespeople" className="nav-link">Salespeople</NavLink>
-            </li>
-            <li>
-              <NavLink to="/salespeople/create/" className="nav-link">Add a Salesperson</NavLink>
-            </li>
-            <li>
               <NavLink to="/customers" className="nav-link">Customers</NavLink>
-            </li>
-            <li>
-              <NavLink to="/customers/create/" className="nav-link">Add a Customer</NavLink>
             </li>
             <li>
               <NavLink to="/sales" className="nav-link">Sales</NavLink>
@@ -62,13 +53,17 @@ function Nav() {
               <NavLink to="/sales/create/" className="nav-link">Add a Sale</NavLink>
             </li>
             <li>
-              <NavLink to="/sales/history/" className="nav-link">Salesperson History</NavLink>
+              <NavLink to="/sales/history/" className="nav-link">SalesPerson History</NavLink>
+            </li>
+            <li>
+              <NavLink to="/salespeople/create/" className="nav-link">Create Sales Employee</NavLink>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
+  );
 }
+
 
 export default Nav;

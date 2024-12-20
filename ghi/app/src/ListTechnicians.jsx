@@ -13,6 +13,24 @@ function TechnicianList() {
                 console.error(error);
             }
         };
+
+        const deleteTechnician = async (id) => {
+            const url = `http://localhost:8080/api/technicians/${id}/`;
+            try {
+                const response = await fetch(url, {
+                    method: "DELETE",
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to delete technician");
+                }
+                // Update state to remove deleted technician
+                setTechnicians((prevTechnicians) =>
+                    prevTechnicians.filter((technician) => technician.id !== id)
+                );
+            } catch (error) {
+                console.error("Error deleting technician:", error);
+            }
+        };
     useEffect(() => {
         fetchTechnicians();
     }, []);
@@ -34,6 +52,14 @@ function TechnicianList() {
                             <td>{technician.first_name}</td>
                             <td>{technician.last_name}</td>
                             <td>{technician.employee_id}</td>
+                            <td>
+                            <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => deleteTechnician(technician.id)}
+                            >
+                                Delete
+                            </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

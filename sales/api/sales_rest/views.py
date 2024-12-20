@@ -80,47 +80,71 @@ def customers_view(request):
         try:
             data = Customer.objects.all()
             return JsonResponse(
-                {"customers" : data},
+                {"customers": data},
                 encoder=CustomerEncoder
             )
         except Exception as error:
             return JsonResponse(
-                {"error" : str(error)},
+                {"error": str(error)},
                 status=400
             )
-    else:
+    elif request.method == "POST":
         try:
             data = json.loads(request.body)
             new_customer = Customer.objects.create(**data)
             return JsonResponse(
-                {"customer" : new_customer},
+                {"customer": new_customer},
                 encoder=CustomerEncoder
-            )
-        except:
-            return JsonResponse(
-                {"error" : "no customer was created."},
-                status=400
-            )
-
-@require_http_methods(["DELETE"])
-def customers_delete(request, id):
-    if request.method == "DELETE":
-        try:
-            customer = Customer.objects.get(id=id)
-            count, _ = customer.delete()
-            return JsonResponse(
-                {"deleted" : count > 0}
             )
         except Exception as error:
             return JsonResponse(
-                {"error" : str(error)},
-                status=404
+                {"error": str(error)},
+                status=400
             )
-    else:
+
+@require_http_methods(["PUT"])
+def customer_update(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+        data = json.loads(request.body)
+        for field, value in data.items():
+            if hasattr(customer, field):
+                setattr(customer, field, value)
+        customer.save()
         return JsonResponse(
-            {"error" : "wrong method was used"},
-            status=405
+            {"customer": customer},
+            encoder=CustomerEncoder
         )
+    except Customer.DoesNotExist:
+        return JsonResponse(
+            {"error": f"Customer with id {id} does not exist."},
+            status=404
+        )
+    except Exception as error:
+        return JsonResponse(
+            {"error": str(error)},
+            status=400
+        )
+
+@require_http_methods(["DELETE"])
+def customers_delete(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+        count, _ = customer.delete()
+        return JsonResponse(
+            {"deleted": count > 0}
+        )
+    except Customer.DoesNotExist:
+        return JsonResponse(
+            {"error": f"Customer with id {id} does not exist."},
+            status=404
+        )
+    except Exception as error:
+        return JsonResponse(
+            {"error": str(error)},
+            status=400
+        )
+
 
 
 class AutomobileVOEncoder(ModelEncoder):

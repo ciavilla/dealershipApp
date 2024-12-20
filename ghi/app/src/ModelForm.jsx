@@ -67,7 +67,7 @@ function ModelForm() {
     return (
         <div className="shadow p-4 mt-4 ">
             <form onSubmit={handleSubmit}>
-                <h1>Create a vehicle model</h1>
+                <h1>Create Vehicle Model</h1>
                 <div className="form-floating mb-3">
                     <input
                         onChange={handleFormChange}
