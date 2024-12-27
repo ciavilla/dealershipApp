@@ -1,15 +1,10 @@
-# CarCar
-CarCar is a application for a car dealership to manage all entities of a car dealership Sales, Service, and Inventory.
+# Dealership
+Dealership is a application for a car dealership to manage all entities of a car dealership Sales, Service, and Inventory.
 
-Team:
-
-* Ciera Villalpando - Service Microservice
-* David Iukuridze- Sales Microservice
 
 ## How to Run this App
 **Ensure that you have Docker, Git, and Node.js 18.2 or above**
 1. Fork the repository.
-    https://gitlab.com/davidiukuridze/project-beta.git
 2. Clone the repository on your local machine.
 3. Build and run the project using Docker with these commands
     docker volume create beta-data
@@ -21,14 +16,14 @@ Team:
 ![Img]
 
 ## Design
-CarCar entails 3 microservices Inventory, Services and Sales. They all interact with each other by use of a poller.
+Dealership entails 3 microservices Inventory, Services and Sales. They all interact with each other by use of a poller.
 
 ## Diagram
 ![IMG](./images/CarCar.png)
 
 
 ## Integration
-CarCar thrives on teamwork! Here's how our domains work together:
+Dealership thrives on teamwork! Here's how our domains work together:
 Inventory Domain: Maintains records for all wehicles available for sale. This data is shared between Sales and Service domains via a poller, ensuring that Sales and Service teams have up-to-date information.
 Sales Domain: Tracks vehicle sales depending on if the vehicle is already listed in the inventory. In-order to create a sale, the sales domain allows for the creation of sales-people and customers. With vehicle data pulled in from Inventory, the sales domain is able to record sales and share this data with the Service domain to manage customer perks.
 Service Domain: Uses inventory and sales data to schedule appointments, check VIP status, and maintain service history for each vehicle.
