@@ -45,7 +45,7 @@ function CustomersList() {
     };
 
     const handleUpdate = async (id) => {
-        const url = `http://localhost:8090/api/customers/${id}/`;
+        const url = `http://localhost:8090/api/api/customers/${id}/`;
         try {
             const response = await fetch(url, {
                 method: "PUT",

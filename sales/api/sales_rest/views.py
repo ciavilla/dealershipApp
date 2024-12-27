@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from common.json import ModelEncoder
 from .models import Salesperson, Customer, Sale, AutomobileVO
 from django.http import JsonResponse
 import json
 import requests
+
 
 class SalespeopleEncoder(ModelEncoder):
     model = Salesperson
@@ -101,31 +103,38 @@ def customers_view(request):
                 {"error": str(error)},
                 status=400
             )
-
+@csrf_exempt
 @require_http_methods(["PUT"])
 def customer_update(request, id):
     try:
-        customer = Customer.objects.get(id=id)
         data = json.loads(request.body)
+        customer = Customer.objects.get(id=id)
+
         for field, value in data.items():
             if hasattr(customer, field):
                 setattr(customer, field, value)
+
         customer.save()
+
         return JsonResponse(
             {"customer": customer},
-            encoder=CustomerEncoder
+            encoder=CustomerEncoder, status=200
+        )
+
+    except json.JSONDecodeError:
+        return JsonResponse(
+            {"error": "Invalid JSON data."}, status=400
         )
     except Customer.DoesNotExist:
         return JsonResponse(
-            {"error": f"Customer with id {id} does not exist."},
-            status=404
+            {"error": f"customer with id {id} does not exist."}, status=404
         )
     except Exception as error:
         return JsonResponse(
-            {"error": str(error)},
-            status=400
+            {"error": str(error)}, status=400
         )
 
+    
 @require_http_methods(["DELETE"])
 def customers_delete(request, id):
     try:
